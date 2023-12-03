@@ -1,0 +1,99 @@
+[
+  {
+    "id": 1,
+    "nombre": "Rotomartillo",
+    "Descripcion": "Rotomartillo uso profesional",
+    "imagen": "./imagenes/rotomartillo.jpg",
+    "precio": "1200",
+    "stock": "350",
+    "categoria": "Taladros"
+  },
+
+  {
+    "id": 2,
+    "nombre": "Tacos Fisher",
+    "Descripcion": "Elementos de fijacion",
+    "imagen": "./imagenes/tacosfisher.jpg",
+    "precio": "8",
+    "stock": "22000",
+    "categoria": "Tornillos"
+  },
+  {
+    "id": 3,
+    "nombre": "Taladro",
+    "Descripcion": "Herramienta de uso domestico",
+    "imagen": "./imagenes/taladro.jpg",
+    "precio": "600",
+    "stock": "1000",
+    "categoria": "Taladros"
+  },
+  {
+    "id": 4,
+    "nombre": "Taladro con Percutor",
+    "Descripcion": "Semi profesional potencia 800 W",
+    "imagen": "./imagenes/taladropercutor.jpg",
+    "precio": "500",
+    "stock": "505",
+    "categoria": "Taladros"
+  },
+  {
+    "id": 5,
+    "nombre": "Tornillos Cromados",
+    "Descripcion": "Tornillos Cromados",
+    "imagen": "./imagenes/TornillosCromados.jpg",
+    "precio": "900",
+    "stock": "409",
+    "categoria": "Tornillos"
+  },
+  {
+  
+    "id": 6,
+    "nombre": "Tornillos Negros",
+    "Descripcion": "Punta mecha para construccion",
+    "imagen": "./imagenes/Tornillos Negros.jpg",
+    "precio": "300",
+    "stock": "1000",
+    "categoria": "Tornillos"
+  },
+  {
+  
+    "id": 7,
+    "nombre": "Martillo",
+    "Descripcion": "Uso doméstico 18o grs.",
+    "imagen": "./imagenes/martillo.jpg",
+    "precio": "300",
+    "stock": "1025",
+    "categoria": "Herramientas"
+  },
+  {
+  
+    "id": 8,
+    "nombre": "Tenaza",
+    "Descripcion": "Uso doméstico" ,
+    "imagen": "./imagenes/alicate de corte.jpg",
+    "precio": "150",
+    "stock": "100",
+    "categoria": "Herramientas"
+  },
+  {
+  
+    "id": 9,
+    "nombre": "Pinza",
+    "Descripcion": "Uso doméstico " ,
+    "imagen": "./imagenes/Tenaza.jpg",
+    "precio": "190",
+    "stock": "1015",
+    "categoria": "Herramientas"
+  },
+  {
+  
+    "id": 10,
+    "nombre": "Destornillador Inalámbrico",
+    "Descripcion": "Uso doméstico " ,
+    "imagen": "./imagenes/DestornilladorElectrico.jpg",
+    "precio": "300",
+    "stock": "100",
+    "categoria": "Herramientas"
+  }
+  
+]

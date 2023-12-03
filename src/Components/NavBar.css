@@ -1,0 +1,30 @@
+/* NavBar.css */
+
+.navbar {
+    background-color: black; /* Color de fondo */
+  }
+  
+  .navbar-dark .navbar-brand,
+  .navbar-dark .navbar-nav .nav-link {
+    color: #fff; /* Color del texto */
+  }
+  
+  .navbar-dark .navbar-toggler-icon {
+    border-color: #fff; /* Color del icono del botón desplegable */
+  }
+  
+  .navbar-dark .navbar-toggler:focus,
+  .navbar-dark .navbar-toggler:hover {
+    background-color: #fff; /* Color de fondo del botón desplegable al pasar el ratón */
+  }
+  
+  .navbar-nav .nav-link.active {
+    color: #ffc107; /* Color del texto para la pestaña activa */
+  }
+  
+  .nav-link {
+    padding: 0.5rem 1rem; 
+  }
+  
+ 
+  

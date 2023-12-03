@@ -1,0 +1,32 @@
+[
+    {
+        "id": 1,
+        "nombre": "Rotomartillo",
+        "stock": 500
+    },
+    {
+        "id": 2,
+        "nombre": "Tacos Fisher",
+        "stock": 500
+    },
+    {
+        "id": 3,
+        "nombre": "Taladro",
+        "stock": 500
+    },
+    {
+        "id": 4,
+        "nombre": "Taladro con Percutor",
+        "stock": 2500
+    },
+    {
+        "id": 5,
+        "nombre": "Tornillos Cromados",
+        "stock": 1500
+    },
+    {
+        "id": 6,
+        "nombre": "Tornillos Negros",
+        "stock": 5500
+    }
+]
