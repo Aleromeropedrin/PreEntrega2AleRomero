@@ -20,13 +20,12 @@ function NavBar() {
         <Navbar.Collapse id="navbar-nav">
           <Nav className="me-auto">
             <Link to="/" className={`nav-link ${location.pathname === '/' ? 'active' : ''}`}>Inicio</Link>
-            <Link to="/category/Herramientas" className={`nav-link ${location.pathname.includes('/category/Herramientas') ? 'active' : ''}`}>Herramientas</Link>
+            <Link to="/category/Herramientas" className={`nav-link ${location.pathname.includes('/categoria/Herramientas') ? 'active' : ''}`}>Herramientas</Link>
             <Link to="/category/Tornillos" className={`nav-link ${location.pathname.includes('/category/Tornillos') ? 'active' : ''}`}>Tornillos</Link>
             <Link to="/category/Taladros" className={`nav-link ${location.pathname.includes('/category/Taladros') ? 'active' : ''}`}>Taladros</Link>
           </Nav>
           <Nav>
-            <Link to="/cart" className="nav-link">
-              <CartWidget />
+            <Link to="/cart" ><CartWidget />
             </Link>
           </Nav>
         </Navbar.Collapse>

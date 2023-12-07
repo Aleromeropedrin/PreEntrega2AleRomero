@@ -1,27 +1,34 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import arrayProductos from '../Json/arrayProducto.json';
-import ItemDetail from '../ItemDetail/ItemDetail';
+import arrayProducto from '../Json/arrayProducto.json';
+
 
 const ItemDetailContainer = () => {
-  const [item, setItem] = useState(null); 
+  const [item, setItem] = useState(null);
   const { id } = useParams();
 
   useEffect(() => {
-    const promesa = new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(arrayProductos.find((item) => item.id === parseInt(id)));
-      }, 2000);
-    });
-    promesa.then((data) => {
-      setItem(data);
-    });
+    const fetchData = async () => {
+      try {
+        // Simula una demora de 2 segundos antes de resolver la promesa
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+
+        const data = arrayProducto.find((item) => item.id == parseInt(id));
+        setItem(data);
+      } catch (error) {
+        
+      }
+    };
+
+    fetchData();
   }, [id]);
 
   return (
     <div className='container'>
       <div className='row'>
-        <ItemDetail item={item} /> {/* Cambiado a 'item' */}
+        
+          <ItemDetail item={item} />
+      
       </div>
     </div>
   );
