@@ -4,14 +4,15 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import CartWidget from '../CartWidget/CartWidget';
-import Logo from '../NavBar/logo';  
-import '../NavBar.css';
+import Logo from './logo';  
+
 
 function NavBar() {
   const location = useLocation();
 
   return (
-    <Navbar bg="dark" variant="dark" expand="lg" sticky="top">
+    <Navbar bg="dark" variant="dark" expand="lg" sticky="top"
+      className="fixed.top">
       <Container>
         <>
           <Navbar.Brand as={Link} to="/">

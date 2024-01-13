@@ -1,0 +1,17 @@
+.operacion {
+    background-color:  var(--bs-body-color); 
+    color: #fff; 
+    border: none;
+    padding: 5px 10px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 5px;
+    border-color: #0056b3;
+    margin-bottom: 5px;
+    
+  }
+  
+  .operacion:hover, .operacion:hover {
+    background-color: #2e649e; 
+    color: black;
+  }

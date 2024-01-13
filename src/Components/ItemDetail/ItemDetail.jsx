@@ -1,44 +1,42 @@
 import React, { useState } from 'react';
+import ItemCount from '../ItemCount/ItemCount';
 import { Link } from 'react-router-dom';
-import '../item.css';
+import { useCartContext } from '../Context/CartContext';
+import '../ItemDetail/ItemDetail.css'
 
 const ItemDetail = ({ item }) => {
-  const [mostrarDetallesAdicionales, setMostrarDetallesAdicionales] = useState(false);
+  const [goToCart, setGoToCart] = useState(false);
+  const { addProduct, removeProduct } = useCartContext();
 
-  if (!item) {
-    return <div>Cargando...</div>;
-  }
-
-  const toggleDetallesAdicionales = () => {
-    setMostrarDetallesAdicionales(!mostrarDetallesAdicionales);
+  const onAdd = (quantity) => {
+    setGoToCart(true);
+    addProduct(item, quantity);
   };
 
+  const onRemove = () => {
+    // Lógica para eliminar el producto del carrito
+    removeProduct(item.id);
+  };
+
+  if (!item) {
+    return <p>Cargando...</p>;
+  }
+
   return (
-    <div className='row'>
-      <div className='col-md-4 offset-md-4'>
-        <img src={item.imagen} className='img-fluid' alt={item.nombre} />
-        <h3>{item.nombre}</h3>
-        <p>{item.descripcion}</p>
-        <p>$ {item.precio}</p>
-        <p>cantidad: {item.stock}</p>
-        
-        {/* Botón para mostrar/ocultar detalles adicionales */}
-        <button onClick={toggleDetallesAdicionales}>
-          {mostrarDetallesAdicionales ? 'Ocultar Detalles' : 'Mostrar Detalles Adicionales'}
-        </button>
-
-        {/* Detalles adicionales */}
-        {mostrarDetallesAdicionales && (
-          <div>
-            <p>Detalles Adicionales: {item.detallesAdicionales}</p>
-            {/* Agrega más detalles adicionales según sea necesario */}
-          </div>
+    <div className="item-detail">
+      <div className="col-md-4 offset-md-4">
+        <img src={item.img} className="img-fluid" alt={item.title} />
+        <h2>{item.title}</h2>
+        <p>{item.description}</p>
+        <p>$ {item.price}</p>
+        <p>Cantidad: {item.stock}</p>
+      </div>
+      <div>
+        {goToCart ? (
+          <Link to="/cart">Terminar compra</Link>
+        ) : (
+          <ItemCount stock={item.stock} initial={0} onAdd={onAdd} onRemove={onRemove} />
         )}
-
-        {/* Botón para ver más detalles en una nueva ruta */}
-        <Link to={`/ItemDetails/${item.id}`}>
-          <button>Ver Detalles</button>
-        </Link>
       </div>
     </div>
   );

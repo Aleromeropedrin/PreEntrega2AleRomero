@@ -39,7 +39,7 @@
   {
     "id": 5,
     "nombre": "Tornillos Cromados",
-    "Descripcion": "Tornillos Cromados",
+    "Descripcion": "Tornillos Cromados 1/4 pulgadas",
     "imagen": "../imagenes/TornillosCromados.jpg",
     "precio": "900",
     "stock": "409",
