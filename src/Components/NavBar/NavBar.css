@@ -1,36 +1,38 @@
 /* NavBar.css */
 
+/* Estilos generales de la barra de navegación */
 .navbar {
-  background-color: black; /* Color de fondo */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #c2dbe9;
+  padding: 10px;
 }
 
-.navbar-dark .navbar-brand,
-.navbar-dark .navbar-nav .nav-link {
-  color: #fff; /* Color del texto */
+/* Estilos para el logo en la barra de navegación */
+.navbar__logo {
+  height: 30px;
+  width: 20px;
 }
 
-.navbar-dark .navbar-toggler-icon {
-  border-color: #fff; /* Color del icono del botón desplegable */
+/* Estilos para el menú en la barra de navegación */
+.navbar__menu {
+  display: flex;
+  list-style: none;
+  margin: 0; /* Corregido: debería ser 0 en lugar de 10 para evitar márgenes adicionales */
+  padding: 0;
 }
 
-.navbar-dark .navbar-toggler:focus,
-.navbar-dark .navbar-toggler:hover {
-  background-color: #fff; /* Color de fondo del botón desplegable al pasar el ratón */
+.navbar__menu li {
+  margin-right: 10px;
 }
 
-.navbar-nav .nav-link.active {
-  color: #ffc107; /* Color del texto para la pestaña activa */
+.navbar__menu li a {
+  text-decoration: none;
+  color: #333;
 }
 
-.nav-link {
-  padding: 0.5rem 1rem; /* Ajustar el espacio alrededor de los enlaces */
+/* Estilos para el carrito en la barra de navegación */
+.navbar__cart {
+  margin-left: 10px;
 }
-
-.navbar {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 1000; 
-}
- 
-  

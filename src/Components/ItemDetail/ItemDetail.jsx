@@ -35,7 +35,7 @@ const ItemDetail = ({ item }) => {
         {goToCart ? (
           <Link to="/cart">Terminar compra</Link>
         ) : (
-          <ItemCount stock={item.stock} initial={0} onAdd={onAdd} onRemove={onRemove} />
+          <ItemCount stock={item.stock} initial={1} onAdd={onAdd} onRemove={onRemove} />
         )}
       </div>
     </div>

@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useCartContext } from "../Context/CartContext"
 import {getFirestore, collection, addDoc, updateDoc, doc, getDoc} from 'firebase/firestore';
-
+import '../CheckOut/CheckOut.css';
 export const CheckOut = () =>{
       const [nombre, setNombre] = useState('');
       const [apellido, setApellido] = useState('');
