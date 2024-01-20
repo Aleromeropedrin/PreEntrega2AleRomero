@@ -1,11 +1,10 @@
 import React from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 import { useCartContext } from '../Context/CartContext';
 import ItemCart from '../ItemCart/ItemCart';
 
 const Cart = () => {
   const { cart, totalPrice, removeUnit, totalProducts } = useCartContext();
-  const history = useHistory(); // Obtener el objeto de historial de navegación
 
   const handleRemoveUnit = (itemId) => {
     removeUnit(itemId);
