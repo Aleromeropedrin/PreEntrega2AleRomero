@@ -1,6 +1,13 @@
-import { useState } from "react";
-import { useCartContext } from "../Context/CartContext";
-import { getFirestore, collection, addDoc, updateDoc, doc, getDoc } from 'firebase/firestore';
+import React, { useState } from 'react';
+import { useCartContext } from '../Context/CartContext';
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  doc,
+  runTransaction,
+  serverTimestamp,
+} from 'firebase/firestore';
 import Toastify from 'toastify-js';
 import 'toastify-js/src/toastify.css';
 import '../CheckOut/CheckOut.css';
@@ -13,7 +20,6 @@ export const CheckOut = () => {
   const [emailConfirmacion, setEmailConfirmacion] = useState('');
   const [error, setError] = useState('');
   const [ordenId, setOrdenId] = useState('');
-  const [mensaje, setMensaje] = useState('');
 
   const { cart, totalPrice, removeProduct } = useCartContext();
 
@@ -22,17 +28,17 @@ export const CheckOut = () => {
       text: message,
       duration: 4000,
       close: true,
-      gravity: "top",
-      position: "center",
+      gravity: 'top',
+      position: 'center',
       stopOnFocus: true,
       style: {
-        color: "#000000",
-        background: "linear-gradient(to right, #ff8c00, #fbc056)",
-        borderRadius: "1rem",
-        textTransform: "uppercase",
-        fontSize: ".75rem"
+        color: '#000000',
+        background: 'linear-gradient(to right, #ff8c00, #fbc056)',
+        borderRadius: '1rem',
+        textTransform: 'uppercase',
+        fontSize: '.75rem',
       },
-      onClick: function () { }
+      onClick: function () {},
     }).showToast();
   };
 
@@ -57,7 +63,7 @@ export const CheckOut = () => {
         cantidad: producto.quantity,
       })),
       total: total,
-      fecha: new Date(),
+      fecha: serverTimestamp(),
       nombre,
       apellido,
       telefono,
@@ -67,6 +73,30 @@ export const CheckOut = () => {
     try {
       const db = getFirestore();
       const docRef = await addDoc(collection(db, 'orders'), orden);
+
+      // Obtén la referencia del documento del producto y actualiza el stock
+      for (const producto of cart) {
+        const productRef = doc(db, 'products', producto.id);
+
+        await runTransaction(db, async (transaction) => {
+          const productDoc = await transaction.get(productRef);
+
+          if (!productDoc.exists()) {
+            throw new Error('El producto no existe en la base de datos.');
+          }
+
+          const currentStock = productDoc.data().stock;
+          const newStock = currentStock - producto.quantity;
+
+          if (newStock < 0) {
+            throw new Error(
+              'No hay suficiente stock disponible para este producto.'
+            );
+          }
+
+          transaction.update(productRef, { stock: newStock });
+        });
+      }
 
       setOrdenId(docRef.id);
       removeProduct();
@@ -83,54 +113,74 @@ export const CheckOut = () => {
     setTelefono('');
     setEmail('');
     setEmailConfirmacion('');
-    setMensaje('');
   };
 
   return (
     <div>
       <h2> Complete el formulario para confirmar la compra </h2>
       <form onSubmit={manejadorFormulario}>
-        {cart.map((producto) => (
-          <div key={producto.id}>
-            <p>{''} {producto.nombre} {producto.cantidad}</p>
-            <p>{producto.precio}</p>
-          </div>
-        ))}
-
         <div>
           <label className="lab-check">Nombre:</label>
-          <input className="input-check" type="text" value={nombre} onChange={(e) => setNombre(e.target.value)} />
+          <input
+            className="input-check"
+            type="text"
+            value={nombre}
+            onChange={(e) => setNombre(e.target.value)}
+          />
         </div>
 
         <div>
           <label className="lab-check">Apellido:</label>
-          <input className="input-check" type="text" value={apellido} onChange={(e) => setApellido(e.target.value)} />
+          <input
+            className="input-check"
+            type="text"
+            value={apellido}
+            onChange={(e) => setApellido(e.target.value)}
+          />
         </div>
 
         <div>
           <label className="lab-check">Telefono:</label>
-          <input className="input-check" type="number" value={telefono} onChange={(e) => setTelefono(e.target.value)} />
+          <input
+            className="input-check"
+            type="number"
+            value={telefono}
+            onChange={(e) => setTelefono(e.target.value)}
+          />
         </div>
 
         <div>
           <label className="lab-check">Email:</label>
-          <input className="input-check" type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+          <input
+            className="input-check"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
         </div>
 
         <div>
           <label className="lab-check">Confirmar email</label>
-          <input className="input-check" type="email" value={emailConfirmacion} onChange={(e) => setEmailConfirmacion(e.target.value)} />
+          <input
+            className="input-check"
+            type="email"
+            value={emailConfirmacion}
+            onChange={(e) => setEmailConfirmacion(e.target.value)}
+          />
         </div>
 
         {error && <p>{error}</p>}
         {ordenId && (
-          <p> ¡Gracias por tu compra ! Tu numero de seguimiento es: <br /> {''} {ordenId} {''} <br /></p>
+          <p>
+            ¡Gracias por tu compra ! Tu numero de seguimiento es: <br /> {''}{' '}
+            {ordenId} {''} <br />
+          </p>
         )}
 
         <div>
-          <button type="submit" disabled={totalPrice === 0}>
-  Enviar
-</button>
+          <button type="submit" disabled={totalPrice() === 0}>
+            Enviar
+          </button>
         </div>
       </form>
     </div>
