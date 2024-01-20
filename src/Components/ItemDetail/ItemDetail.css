@@ -1,8 +1,7 @@
 
-
-.img-fluid {
-    max-height: 200px; 
-    width: 800px; 
-    margin: bottom 20px;
-}
+.custom-img-class {
+    width: 100%; 
+    height: auto;
+ }
+ 
 
