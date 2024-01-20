@@ -35,6 +35,16 @@ const CartProvider = ({ children }) => {
   const removeProduct = (id) =>
     setCart(cart.filter((cartItem) => cartItem.id !== id));
 
+  const removeUnit = (id) => {
+    setCart(
+      cart.map((cartItem) => {
+        return cartItem.id === id && cartItem.quantity > 0
+          ? { ...cartItem, quantity: cartItem.quantity - 1 }
+          : cartItem;
+      })
+    );
+  };
+
   return (
     <CartContext.Provider
       value={{
@@ -44,6 +54,7 @@ const CartProvider = ({ children }) => {
         addProduct,
         totalPrice,
         totalProducts,
+        removeUnit,
         cart,
       }}
     >
