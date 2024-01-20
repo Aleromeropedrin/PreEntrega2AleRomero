@@ -1,46 +1,53 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import { useCartContext } from '../Context/CartContext';
 import ItemCart from '../ItemCart/ItemCart';
-import '../Item/item.css';
-import ErrorMessage from '../ErrorMessage'; 
 
 const Cart = () => {
-  const { cart, totalPrice, removeUnit, removeProduct, totalProducts } = useCartContext();
-  const [errorMessage, setErrorMessage] = useState(null);
+  const { cart, totalPrice, removeUnit, totalProducts } = useCartContext();
+  const history = useHistory(); // Obtener el objeto de historial de navegación
+
+  const handleRemoveUnit = (itemId) => {
+    removeUnit(itemId);
+  };
 
   const handleCheckout = () => {
     // Validar que el total de productos sea mayor que cero antes de permitir el pago
     if (totalProducts() > 0) {
-      // Redirigir al usuario a la página de pago
-      // Puedes utilizar react-router-dom o cualquier otra lógica de navegación
-      // En este ejemplo, simplemente se imprime un mensaje en la consola
-      console.log('Redirigiendo al proceso de pago en Ferretería Avenida...');
+      // Redirigir al usuario a la página de pago (o a la que desees)
+      console.log('Redirigiendo al proceso de pago...');
+      // En este ejemplo, redirige al inicio después de 2 segundos
+      setTimeout(() => {
+        history.push('/');
+      }, 2000);
     } else {
-      // Mostrar un mensaje si el total es cero
-      setErrorMessage('El carrito está vacío. ¿Desea agregar productos antes de comprar en Ferretería Avenida?');
+      // Mostrar una alerta si el total es cero
+      alert('No puedes realizar el pago. El carrito está vacío. ¿Desea seguir comprando?');
     }
-  };
-
-  const closeErrorMessage = () => {
-    setErrorMessage(null);
   };
 
   return (
     <>
-      {cart.map((item) => (
-        <div key={item.id} className="cart-item">
-          <ItemCart item={item} />
-          <button onClick={() => removeUnit(item.id)}>Eliminar 1 unidad</button>
-        </div>
-      ))}
-      <p>Total: $ {totalPrice()}</p>
-      <button className="btn-total" onClick={handleCheckout}>
-        Finalizar Compra
-      </button>
-
-      {errorMessage && (
-        <ErrorMessage message={errorMessage} onClose={closeErrorMessage} />
+      {cart.length === 0 ? (
+        <>
+          <p>No hay elementos en el carrito</p>
+          <Link to="/">Hacer compras</Link>
+        </>
+      ) : (
+        <>
+          {cart.map((item) => (
+            <div key={item.id} className="cart-item">
+              <ItemCart item={item} />
+              <button onClick={() => handleRemoveUnit(item.id)}>Eliminar 1 unidad</button>
+            </div>
+          ))}
+          <p>Total: $ {totalPrice()>1}</p>
+          <Link to="/checkout">
+            <button className="btn-total" onClick={handleCheckout}>
+              Finalizar Compra
+            </button>
+          </Link>
+        </>
       )}
     </>
   );

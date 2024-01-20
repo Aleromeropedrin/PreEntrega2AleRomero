@@ -128,7 +128,9 @@ export const CheckOut = () => {
         )}
 
         <div>
-          <button type="submit"> Enviar </button>
+          <button type="submit" disabled={totalPrice === 0}>
+  Enviar
+</button>
         </div>
       </form>
     </div>
